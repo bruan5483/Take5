@@ -1,1 +1,0 @@
-#mediapipe testing & discovery
