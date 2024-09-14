@@ -3,4 +3,6 @@
 
 # Setup
 Install MediaPipe in the terminal:
-```pip install -q mediapipe```
+```
+pip install -q mediapipe
+```
