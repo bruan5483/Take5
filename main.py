@@ -9,13 +9,11 @@ settings.init()
 
 def create_image(state_on):
     """Creates an icon image based on the state."""
-
     if state_on: return Image.open("iconOn.png")
     else: return Image.open("iconOff.png")
 
 def toggle_state(icon, item):
     """Toggles the state and updates the tray icon."""
-    # global state
     settings.state = not settings.state
 
     if settings.state: 
