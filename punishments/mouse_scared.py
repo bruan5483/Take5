@@ -3,6 +3,7 @@ from time import sleep
 
 last_pos = mouse.get_position()
 
+TIME_LIMIT = 5
 flag = True
 
 def on_move(event):
@@ -16,7 +17,7 @@ def on_move(event):
 
 mouse.hook(on_move)
 
-sleep(5)
+sleep(TIME_LIMIT)
 flag = False # off
 
 sleep(5)
