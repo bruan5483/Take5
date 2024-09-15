@@ -4,6 +4,7 @@ import math
 from playsound import playsound
 import time
 import numpy as np
+from insult_ai import insult
 
 jumping_punishment = False
 
@@ -78,14 +79,22 @@ def jumping():
 
 def punish(reason):
     global jumping_punishment
+    global embarrasment
     # playsound('I Want To Be Ninja! (Neenja) Original song by Jennifer Murphy.mp3')
     # print(reason)
-    jumping_punishment = True
+    insult(reason)
+    if embarrasment <= 4:
+        jumping_punishment = False
+        embarrasment += 1
+    else:
+        insult("jumping")
+        jumping_punishment = True
+        embarrasment = 0
 
 
 def vzn():
     global screenStreak, embarrasment, blinks, cap, jumping_punishment, counter
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(2)
     face = mp_face_mesh.FaceMesh(
         static_image_mode=False,
         refine_landmarks=True,
@@ -140,7 +149,7 @@ def vzn():
                 counter = 0
                 stage = None
         else:
-            print('garbage')
+            # print('garbage')
             rFaces = face_detection.process(frame)
             results = face.process(frame)
             if rFaces.detections:

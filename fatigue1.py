@@ -97,7 +97,7 @@ yawining = False
 yawn_conf = []
 
 # Capture video from webcam.
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(2)
 
 # Check if the webcam is opened correctly.
 if not cap.isOpened():
