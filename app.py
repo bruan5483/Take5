@@ -4,8 +4,12 @@ from pystray import MenuItem as Item
 from threading import Thread
 import settings
 from main import main
+import os
 
 settings.init()
+
+def run():
+    os.system("python3 main.py")
 
 def create_image(state_on):
     """Creates an icon image based on the state."""
