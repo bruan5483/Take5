@@ -1,15 +1,17 @@
 import pystray
 from PIL import Image
+from time import sleep
 from pystray import MenuItem as Item
 from threading import Thread
 import settings
 # from main import main
-import os
+import subprocess
 
 settings.init()
+sleep(0.1)
 
 def run():
-    os.system("python3 main.py")
+    subprocess.run(["python3", "main.py"])
 
 def create_image(state_on):
     """Creates an icon image based on the state."""
