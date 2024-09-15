@@ -11,4 +11,6 @@ pip install ctypes
 pip install pyautogui
 pip install playsound
 pip install pygame
+pip install pystray
+pip install pillow
 ```
