@@ -3,7 +3,7 @@ from PIL import Image
 from pystray import MenuItem as Item
 from threading import Thread
 import settings
-from main import main
+# from main import main
 import os
 
 settings.init()
@@ -22,7 +22,7 @@ def toggle_state(icon, item):
 
     if settings.state: 
         print("Enabled.")
-        t = Thread(target=main)
+        t = Thread(target=run)
         t.start()
     else: 
         print("Disabled.")
