@@ -3,8 +3,11 @@ import time
 
 screen_width, screen_height = pyautogui.size()
 prev_x, prev_y = pyautogui.position()
+start = time.perf_counter()
 
-while True:
+TIME_LIMIT = 10
+
+while time.perf_counter() - start < TIME_LIMIT:
     current_x, current_y = pyautogui.position()
     dx = current_x - prev_x
     dy = current_y - prev_y

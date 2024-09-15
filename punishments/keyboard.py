@@ -5,7 +5,7 @@ from time import sleep, perf_counter as pf
 
 k = Controller()
 
-TIME_LIMIT = 5
+TIME_LIMIT = 10
 
 keys = list("abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\;',./{}|:\"<>?_+!@#$%^&*()")
 
