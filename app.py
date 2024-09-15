@@ -25,6 +25,7 @@ def toggle_state(icon, item):
     """Toggles the state and updates the tray icon."""
     with open("settings.txt", "r+") as f:
         if not state:
+            f.write('')
             print("Enabled.")
             t = Thread(target=run)
             t.start()
