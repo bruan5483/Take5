@@ -1,6 +1,6 @@
-# inverts perfectly but can't click/scroll
+# inverts perfectly but can't click/scroll, DOES NOT WORK ON MAC
 
-from pynput.mouse import Controller, Listener, Button
+from pynput.mouse import Controller, Listener
 import mouse
 from time import sleep, perf_counter as pf
 m = Controller()

@@ -2,7 +2,13 @@
 A project built during Hack the North 2024.
 
 # Setup
-Install MediaPipe in the terminal:
+Install the following dependencies:
 ```
 pip install -q mediapipe
+pip install pynput
+pip install mouse
+pip install ctypes
+pip install pyautogui
+pip install playsound
+pip install pygame
 ```
