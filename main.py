@@ -7,7 +7,6 @@ import numpy as np
 from insult_ai import insult
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-import settings
 
 jumping_punishment = False
 
@@ -146,7 +145,10 @@ def vzn():
         model_selection=1, 
         min_detection_confidence=0.5
     )
-    while settings.state:
+    while True:
+        with open("settings.txt") as f:
+            if len(f.read()) > 0: break
+            
         ret, frame = cap.read()
         if not ret:
             continue

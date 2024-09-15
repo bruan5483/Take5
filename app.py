@@ -3,12 +3,14 @@ from PIL import Image
 from time import sleep
 from pystray import MenuItem as Item
 from threading import Thread
-import settings
 # from main import main
 import subprocess
 
-settings.init()
+with open("settings.txt", "w") as f:
+    f.write("stop")
+
 sleep(0.1)
+state = False
 
 def run():
     subprocess.run(["python3", "main.py"])
@@ -19,26 +21,28 @@ def create_image(state_on):
     else: return Image.open("iconOff.png")
 
 def toggle_state(icon, item):
+    global state
     """Toggles the state and updates the tray icon."""
-    settings.state = not settings.state
-
-    if settings.state: 
-        print("Enabled.")
-        t = Thread(target=run)
-        t.start()
-    else: 
-        print("Disabled.")
-
-    icon.icon = create_image(settings.state)
+    with open("settings.txt", "r+") as f:
+        if not state:
+            print("Enabled.")
+            t = Thread(target=run)
+            t.start()
+            icon.icon = create_image(True)
+        else:
+            f.write("stop")
+            print("Disabled.")
+            icon.icon = create_image(False)
+    state = not state
 
 def setup(icon):
     """Initial setup of the tray icon, no menu."""
-    icon.icon = create_image(settings.state)
+    icon.icon = create_image(state)
     icon.visible = True
 
 menu = pystray.Menu(
     Item("Toggle State", toggle_state, default=True) 
 )
 
-icon = pystray.Icon("VZN", icon=create_image(settings.state), menu=menu)
+icon = pystray.Icon("Take5", icon=create_image(state), menu=menu)
 icon.run(setup=setup)
