@@ -147,13 +147,17 @@ def vzn():
     )
     while True:
         with open("settings.txt") as f:
-            if len(f.read()) > 0: break
+            print(f.read())
+            if len(f.read()) > 0: 
+                print(f.read())
+                break
             
         ret, frame = cap.read()
         if not ret:
             continue
             
         if jumping_punishment:
+            print('garbhahaage')
             image1 = cap.read()[1]
             results1 = pose.process(image1)
             if results1.pose_landmarks:
@@ -193,7 +197,7 @@ def vzn():
                 counter = 0
                 stage = None
         else:
-            # print('garbage')
+            print('garbage')
             rFaces = face_detection.process(frame)
             results = face.process(frame)
             if rFaces.detections:
