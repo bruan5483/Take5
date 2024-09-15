@@ -134,7 +134,7 @@ while True:
         # Mouth aspect ratio (MAR) for yawning detection
         mar = mouth_aspect_ratio(landmarks, MOUTH_UPPER, MOUTH_LOWER)
 
-        # Detect yawning
+        # Detect yawning.
         if (mar > MOUTH_AR_THRESHOLD and left_eye<1 and right_eye<1):
             if (eye_closed_time != 0 and time.time() - eye_closed_time > 1):
                 if not yawning:
@@ -150,28 +150,28 @@ while True:
                 eye_conf.clear()
 
         # Detect eye closure for 5 seconds (30 fps)
-        if left_eye<1 and right_eye<1:
+        if left_eye < 1 and right_eye < 1:
             if eye_closed_time == 0:
                 eye_closed_time = time.time()
                 eye_conf.clear()
             elif len(eye_conf) < 150:
                 eye_conf.append(True)
             elif len(eye_conf)==150:
-                print("Eye closure was detected; Consider taking a break or going to bed!")
+                print("Eye closure was detected; Consider getting some rest!")
                 eye_conf.clear()
         else:
             eye_closed_time = 0
             eye_conf.clear()
             
-    # Display the image with landmarks.
+    # Display the image with landmarks
     rgb_image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     annotated_image = draw_landmarks_on_image(rgb_image, detection_result)
     cv2.imshow('Face Landmarks', cv2.cvtColor(annotated_image, cv2.COLOR_RGB2BGR))
 
-    # Exit the loop when 'q' is pressed.
+    # Exit the loop when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Release the webcam and close all windows.
+# Close 
 cap.release()
 cv2.destroyAllWindows()
