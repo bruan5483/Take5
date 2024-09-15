@@ -6,25 +6,26 @@ import punishments
 
 def punishment():
     # insult("punish")
-    rand = randint(1, 6)
-    if rand == 1:
-        os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/keyboard.py'")
-        print(1)
-    elif rand == 2:
-        os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/sign out.py'")
-        print(2)
-    elif rand == 3:
-        os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/song.py'")
-        print(3)
-    elif rand == 4:
-        punishments.desktops()
-        print(4)
-    elif rand == 5:
-        punishments.quitApp()
-        print(5)
-    elif rand == 6:
-        punishments.forkBomb()
-        print(6)
+    # rand = randint(1, 6)
+    # if rand == 1:
+    #     os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/keyboard.py'")
+    #     print(1)
+    # elif rand == 2:
+    #     os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/sign out.py'")
+    #     print(2)
+    # elif rand == 3:
+    #     os.system("python3 '/Users/raymondrost/VSCode-Projects/HTN 2024 Repo/EyeTracking/punishments/song.py'")
+    #     print(3)
+    # elif rand == 4:
+    #     punishments.desktops()
+    #     print(4)
+    # elif rand == 5:
+    #     punishments.quitApp()
+    #     print(5)
+    # elif rand == 6:
+    #     punishments.forkBomb()
+    #     print(6)
+    print("punished")
 
 
 def insult(reason):
@@ -41,10 +42,14 @@ def insult(reason):
         content = "Tell someone you are going to mess with their computer to force them to get up and exercise."
     elif reason == "jumping":
         content = "Tell someone to get up and do five jumping jacks while insulting them."
+    elif reason == "drifting off":
+        content = "Give me an insult for someone who spends so much time at their computer that they are falling asleep."
+    elif reason == "yawning":
+        content = "Give me an insult for someone who is yawning because they need to go to sleep but refuse to."
     # content = "Give me an insult for someone with terrible posture at their computer"
 
     # Groq client
-    client = Groq(api_key="KEY")
+    client = Groq(api_key="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")
 
 
 
@@ -70,8 +75,8 @@ def insult(reason):
 
     # AWS
     session = boto3.Session(
-        aws_access_key_id="KEY",
-        aws_secret_access_key="KEY")
+        aws_access_key_id="AKIAUW4RAQHAFPEWXIGQ",
+        aws_secret_access_key="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")
 
     AWSclient = session.client('polly', region_name='us-east-1')
 

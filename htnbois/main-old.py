@@ -5,9 +5,7 @@ from playsound import playsound
 import time
 import numpy as np
 from insult_ai import insult
-# from fatigue2 import fatigue
-from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
+from fatigue2 import fatigue
 
 jumping_punishment = False
 
@@ -94,48 +92,8 @@ def punish(reason):
         jumping_punishment = True
         embarrasment = 0
 
-# Start of yawning detection
-
-# Constant
-MOUTH_AR_THRESHOLD = 0.75  # Threshold for detecting yawning
-
-# Function to compute aspect ratio for mouth (for yawning detection)
-def mouth_aspect_ratio(landmarks, upper_lip, lower_lip):
-    vertical = np.linalg.norm(np.array([landmarks[upper_lip[3]].x, landmarks[upper_lip[3]].y]) -
-                              np.array([landmarks[lower_lip[7]].x, landmarks[lower_lip[7]].y]))
-    horizontal = np.linalg.norm(np.array([landmarks[upper_lip[0]].x, landmarks[lower_lip[0]].x]) -
-                                np.array([landmarks[upper_lip[-1]].x, landmarks[lower_lip[-1]].x]))
-    
-    mar = vertical / horizontal
-    return mar
-
-# Indices for left and right eyes and mouth landmarks
-MOUTH_UPPER = [61, 185, 40, 39, 37, 0, 267, 269, 270]  # lipsUpperOuter
-MOUTH_LOWER = [146, 91, 181, 84, 17, 314, 405, 321]  # lipsLowerOuter
-
-# Create a FaceLandmarker object with the model.
-base_options = python.BaseOptions(model_asset_path='face_landmarker_v2_with_blendshapes.task')
-options = vision.FaceLandmarkerOptions(base_options=base_options,
-                                       output_face_blendshapes=True,
-                                       output_facial_transformation_matrixes=True,
-                                       num_faces=1)
-detector = vision.FaceLandmarker.create_from_options(options)
-
-
 
 def vzn():
-    # Initialize variable for eye closed detection
-    eye_closed_time = 0
-    eye_conf = []
-
-    # Initialize variables for yawn detection
-    yawn_start_time = 0
-    yawining = False
-    yawn_conf = []
-
-    # End of yawning detection
-
-
     global screenStreak, embarrasment, blinks, cap, jumping_punishment, counter
     cap = cv2.VideoCapture(2)
     face = mp_face_mesh.FaceMesh(
@@ -253,57 +211,9 @@ def vzn():
                         landmark_drawing_spec=None,
                         connection_drawing_spec=mp_drawing_styles
                         .get_default_face_mesh_iris_connections_style())
-                    
-
-
-                    # Yawning detection
-
-                    # Convert the image to RGB format required by MediaPipe.
-                    rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image)
-                    
-                    detection_result = detector.detect(mp_image)
-
-
-                    left_eye = math.sqrt(math.pow(face_landmarks.landmark[159].x-face_landmarks.landmark[145].x,2) + math.pow(face_landmarks.landmark[159].y-face_landmarks.landmark[145].y,2))
-                    right_eye = math.sqrt(math.pow(face_landmarks.landmark[386].x-face_landmarks.landmark[374].x,2) + math.pow(face_landmarks.landmark[374].y-face_landmarks.landmark[477].y,2))
-
-                    # Mouth aspect ratio (MAR) for yawning detection
-                    mar = mouth_aspect_ratio(face_landmarks.landmark, MOUTH_UPPER, MOUTH_LOWER)
-
-                    # Detect yawning.
-                    if (mar > MOUTH_AR_THRESHOLD and left_eye<1 and right_eye<1):
-                        if (eye_closed_time != 0 and time.time() - eye_closed_time > 1):
-                            if not yawning:
-                                yawn_start_time = time.time()
-                            yawning = True
-                            yawn_conf.append(True)
-                    else:
-                        yawning = False
-                        if (yawn_start_time != 0 and len(yawn_conf) > 30 and time.time() - yawn_start_time > 6):
-                            print("Yawning was detected; Consider taking a break or going to bed!")
-                            insult("yawning")
-                            yawn_start_time = 0
-                            yawn_conf.clear()
-                            eye_conf.clear()
-
-                    # Detect eye closure for 5 seconds (30 fps)
-                    if left_eye < 1 and right_eye < 1:
-                        if eye_closed_time == 0:
-                            eye_closed_time = time.time()
-                            eye_conf.clear()
-                        elif len(eye_conf) < 150:
-                            eye_conf.append(True)
-                        elif len(eye_conf)==150:
-                            print("Eye closure was detected; Consider getting some rest!")
-                            insult("drifting off")
-                            eye_conf.clear()
-                    else:
-                        eye_closed_time = 0
-                        eye_conf.clear()
-
             cv2.imshow('MediaPipe Face Mesh', cv2.flip(frame, 1))
         if cv2.waitKey(5) & 0xFF == 27:
             break
+        fatigue(cap)
 
 vzn()
