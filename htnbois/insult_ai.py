@@ -44,7 +44,7 @@ def insult(reason):
     # content = "Give me an insult for someone with terrible posture at their computer"
 
     # Groq client
-    client = Groq(api_key="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")
+    client = Groq(api_key="KEY")
 
 
 
@@ -70,8 +70,8 @@ def insult(reason):
 
     # AWS
     session = boto3.Session(
-        aws_access_key_id="AKIAUW4RAQHAPJCVA7MX",
-        aws_secret_access_key="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")
+        aws_access_key_id="KEY",
+        aws_secret_access_key="KEY")
 
     AWSclient = session.client('polly', region_name='us-east-1')
 
