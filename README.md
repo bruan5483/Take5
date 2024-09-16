@@ -1,7 +1,7 @@
 # Take5
 A project built during Hack the North 2024.
 
-# Setup
+## Setup
 1. Install the following dependencies:
 ```
 pip install -q mediapipe
