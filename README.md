@@ -1,5 +1,5 @@
 # Take5
-A project built during Hack the North 2024.
+A project built during Hack the North 2024. Completed in a 36-hour period using AI facial landmark tracking.
 
 ## Setup
 1. Install the following dependencies:
@@ -25,7 +25,7 @@ pip install pillow
 Our generation, ourselves included, spend copious amounts of time in front of our computers. It’s not a good habit to have, but simply put, building the self-control to wrench oneself away from the screen is quite boring!
 
 ## What it does
-Take5 is an innovative app that records the user’s movements when browsing, and identifies instances of subpar browsing behaviour - leaning in too far, straining your eyes, staying at your computer too long - and corrects the user through a variety of possible punishments, ranging from playing embarrassing music to triggering fork bombs. All the while, our AI bot will chastise users whenever they misbehave, further teaching users to build good browsing habits. No WiFi? No problem! Take5 can run without the AI bot functionality, and all of the other functions of Take5 can run without being connected to the internet.
+Take5 is an innovative app that records the user’s movements when browsing and identifies instances of subpar browsing behaviour - leaning in too far, straining your eyes, staying at your computer too long - and corrects the user through a variety of possible penalties. All the while, an AI bot will verbally inform users whenever they demonstrate signs of poor posture, further teaching users to build good browsing habits. Additionally, the app uses facial landmark data to predict if the user yawns or closes their eyes for a prolonged period and recommends that the user take a break whenever such an instance is detected.
 
 ## How we built it
 | Tool 				| Description 			|
