@@ -61,4 +61,4 @@ Take5 is an innovative app that records the user’s movements when browsing and
 2. The art of pivoting to better ideas, even if that means starting over.
 
 ## What's next for Take5
-Further implementation of a chatbot which gives advice about healthy habits while studying. More variety of punishments and punishable behaviours.
+Further implementation of a chatbot which provides advice about healthy habits while studying. More variety of punishments and punishable behaviours.
